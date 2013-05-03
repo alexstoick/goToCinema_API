@@ -3,7 +3,7 @@ class GmapsDistanceController < ApplicationController
 	def index
 
 		if ! ( params.has_key?(:lat) && params.has_key?(:lng) )
-			redirect_to :action => 'wrong_params'
+			redirect_to :action => "amazing"
 		else
 			lat = params[:lat]
 			lng = params[:lng]
@@ -40,16 +40,6 @@ class GmapsDistanceController < ApplicationController
 				{ 'link' => 'http://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+'%2C'+lng+'&destinations=44.428742%2C26.15415&sensor=false'}
 			]
 
-			# # Read JSON from a file, iterate over objects
-			# file = open("places.json")
-			# json = file.read
-
-			# parsed = JSON.parse(json)
-
-			# parsed["cinemas"].each do |shop|
-			#   print shop["lat"] , " " , shop["lng"] , "\n"
-			# end
-
 			th = []
 			i = 0
 			urls.each do |u|
@@ -60,17 +50,10 @@ class GmapsDistanceController < ApplicationController
 
 					entry["distance"] = parsed['rows'][0]['elements'][0]['distance']['text']
 					entry["duration"] = parsed['rows'][0]['elements'][0]['duration']['value']
-					#puts entry
 					entries.push( entry )
-
-					if urls.all? {|u| u.has_key?("content") }
-						fin = Time.now
-						puts "Duration:                       " + (fin-start).to_s
-					end
 				end
 				i=i+1
 			end
-
 			th.each { |t| t.join }
 			encoded = JSON.generate ( entries )
 			render :text => encoded

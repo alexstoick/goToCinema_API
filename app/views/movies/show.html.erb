@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Regizor:</b>
+  <%= @movie.regizor %>
+</p>
+
+<p>
+  <b>Titluen:</b>
+  <%= @movie.titluEn %>
+</p>
+
+<p>
+  <b>Titluro:</b>
+  <%= @movie.titluRo %>
+</p>
+
+<p>
+  <b>Gen:</b>
+  <%= @movie.gen %>
+</p>
+
+<p>
+  <b>Actori:</b>
+  <%= @movie.actori %>
+</p>
+
+<p>
+  <b>Nota:</b>
+  <%= @movie.nota %>
+</p>
+
+
+<%= link_to 'Edit', edit_movie_path(@movie) %> |
+<%= link_to 'Back', movies_path %>
