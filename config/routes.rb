@@ -1,6 +1,9 @@
 Simple::Application.routes.draw do
-  get "demo/wrong_params"
-  root :to => 'demo#index'
+	get "distance_calculator/index"
+	get "distance_calculator/wrong_params"
+	get "movie_list/index"
+	root :to => 'distance_calculator#index'
+	match "/getMovies" => "movie_list#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
