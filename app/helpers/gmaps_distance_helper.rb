@@ -1,0 +1,2 @@
+module GmapsDistanceHelper
+end
