@@ -1,3 +1,10 @@
+# -*- encoding : utf-8 -*-
+
+if RUBY_VERSION =~ /1.9/
+  Encoding.default_external = Encoding::UTF_8
+  Encoding.default_internal = Encoding::UTF_8
+end
+
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
@@ -9,7 +16,7 @@ group :development do
 	gem 'mysql2'
 end
 
-
+gem 'nokogiri'
 group :production do
 	gem 'mysql2'
 end

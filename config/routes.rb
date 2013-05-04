@@ -1,12 +1,9 @@
 Simple::Application.routes.draw do
+	get "parser/index"
+	get "parser/early_reload"
 
-
-
-  resources :movies
-
-
-  resources :users
-
+	resources :movies
+	resources :users
 
 	root :to => 'distance_calculator#index'
 
@@ -19,6 +16,7 @@ Simple::Application.routes.draw do
 	get "gmaps_distance/wrong_params"
 	get "open_maps/wrong_params"
 
+	match "/parser" => "parser#index"
 	match "/openMaps" => "open_maps#index"
 	match "/googleMaps" => "gmaps_distance#index"
 	match "/getMovies" => "movie_list#index"
