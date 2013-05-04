@@ -5,25 +5,23 @@ class ParserController < ApplicationController
 		require 'open-uri'
 		require 'json'
 
-		file = open ( "date.json" )
-		json = file.read
-		parsed = JSON.parse ( json )
-
-		time_difference = Time.now - Movie.first.updated_at
+		if ( Movie.count == 0 )
+			time_difference = 61
+		else
+			time_difference = Time.now - Movie.first.updated_at
+		end
 
 		if time_difference/60 < 60
 			redirect_to :action => "early_reload"
 		else
 
-			#Movie.delete
 			page = Nokogiri::HTML(open('http://www.cinemagia.ro/program-cinema/bucuresti/'))
 
 			json = []
 
-			puts page.css(".program_cinema_show").length
-
+			Movie.delete_all
+			j = 0
 			page.css(".program_cinema_show").each do |film|
-
 				titluRo = film.css(".title_ro").text
 				titluEn = film.css("h2:first").text
 				details = film.css(".info")[0]
@@ -48,18 +46,30 @@ class ParserController < ApplicationController
 
 						program = program.gsub(/[^0-9:]/i, '')
 						length = (program.length)/5-1
-						for i in 0..length
+						for i in 0..length do
 							ora = program[i*5 , 5 ]
+							j = j + 1
+							intrare = Movie.new
+							intrare.id = j
+							intrare.titluEn = titluEn
+							intrare.titluRo = titluRo
+							intrare.nota = nota ;
+							intrare.gen = gen ;
+							intrare.actori = actori ;
+							intrare.regizor = regizor ;
+
+							intrare.save!
 							intrare = {}
+							intrare [ "id" ] = j
 							intrare [ "titluEn" ] = titluEn
 							intrare [ "titluRo" ] = titluRo
 							intrare [ "cinema" ] = cinemaName
-							intrare [ "ora" ] = ora
-							intrare [ "nota" ] = nota
-							intrare [ "gen" ] = gen
-							intrare [ "actori" ] = actori
-							intrare [ "regizor" ] = regizor
-							#Movie.create ( intrare )
+							intrare [ "ora" ] = ora ;
+							intrare [ "nota" ] = nota ;
+							intrare [ "gen" ] = gen ;
+							intrare [ "actori" ] = actori ;
+							intrare [ "regizor" ] = regizor ;
+
 							json.push ( intrare )
 						end
 					end
@@ -70,10 +80,12 @@ class ParserController < ApplicationController
 			completeJSON["movies"] = json
 			completeJSON["updated"] = Time.now.to_s
 
-			File.open( 'date.json', 'w' ) { |file| file.write( JSON.generate( completeJSON ) ) }
+			generatedJSON = JSON.generate( completeJSON )
+
+			File.open( 'date.json', 'w' ) { |file| file.write( generatedJSON ) }
 			render :text => "Successfully updated" + Time.now.to_s
 		end
-	end #end index
+	end #index
 	def early_reload
 		render :text => "Not enough time since last reload of the data! "
 	end

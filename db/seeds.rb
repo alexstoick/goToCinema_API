@@ -10,7 +10,6 @@ json = []
 Movie.delete_all
 j = 0
 page.css(".program_cinema_show").each do |film|
-	puts j
 	titluRo = film.css(".title_ro").text
 	titluEn = film.css("h2:first").text
 	details = film.css(".info")[0]
@@ -37,7 +36,9 @@ page.css(".program_cinema_show").each do |film|
 			length = (program.length)/5-1
 			for i in 0..length do
 				ora = program[i*5 , 5 ]
-				intrare = {}
+				j = j + 1
+				intrare = Movie.new
+				intrare [ "id" ] = j
 				intrare [ "titluEn" ] = titluEn
 				intrare [ "titluRo" ] = titluRo
 				intrare [ "cinema" ] = cinemaName
@@ -46,12 +47,11 @@ page.css(".program_cinema_show").each do |film|
 				intrare [ "gen" ] = gen ;
 				intrare [ "actori" ] = actori ;
 				intrare [ "regizor" ] = regizor ;
-				Movie.create ( intrare )
+				intrare.save!
 				json.push ( intrare )
 			end
 		end
 	end
-	j = j + 1
 end
 
 
