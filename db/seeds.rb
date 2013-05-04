@@ -8,11 +8,9 @@ page = Nokogiri::HTML(open('http://www.cinemagia.ro/program-cinema/bucuresti/'))
 json = []
 
 Movie.delete_all
-
-puts page.css(".program_cinema_show").length
-
+j = 0
 page.css(".program_cinema_show").each do |film|
-
+	puts j
 	titluRo = film.css(".title_ro").text
 	titluEn = film.css("h2:first").text
 	details = film.css(".info")[0]
@@ -37,7 +35,7 @@ page.css(".program_cinema_show").each do |film|
 
 			program = program.gsub(/[^0-9:]/i, '')
 			length = (program.length)/5-1
-			for i in 0..length
+			for i in 0..length do
 				ora = program[i*5 , 5 ]
 				intrare = {}
 				intrare [ "titluEn" ] = titluEn
@@ -53,4 +51,8 @@ page.css(".program_cinema_show").each do |film|
 			end
 		end
 	end
+	j = j + 1
 end
+
+
+puts "Rake done"
