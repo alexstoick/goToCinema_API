@@ -1,20 +1,27 @@
 Simple::Application.routes.draw do
-	get "parser/index"
-	get "parser/early_reload"
-
-	resources :movies
-	resources :users
 
 	root :to => 'distance_calculator#index'
 
+	resources :movies
+
+	get "parser/index"
+	get "parser/early_reload"
 	get "movie_list/index"
 	get "distance_calculator/index"
 	get "open_maps/index"
 	get "gmaps_distance/index"
-
 	get "distance_calculator/wrong_params"
 	get "gmaps_distance/wrong_params"
 	get "open_maps/wrong_params"
+
+
+	match 'logout/', :to => "sessions#destroy", :as => :logout
+	match 'login/', :to => "sessions#create", :via => :post
+	match 'login/', :to => "sessions#new", :as => :login
+	match 'user/', :to => "users#create", :via => :post
+	match 'user/', :to => "users#index", :as => :users
+	match 'user/new', :to => "users#new", :as => :new_user
+	match 'user/:id', :to => "users#view", :as => :user
 
 	match "/parser" => "parser#index"
 	match "/openMaps" => "open_maps#index"
