@@ -25,8 +25,22 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
-		render :text => "Successfully logout. NOT!"
+
+		if ( params[:token].nil? )
+			render :json => { "error" => "Expecting a token parameter" }
+			return
+		end
+
+		user = User.find_by_authToken( params[:token] )
+		if ( user.nil? )
+			render :json => { "error" => "Token does not exist" }
+		else
+			user.authToken = nil
+			user.save!
+			render :json => { "logout" => true }
+		end
 	end
 end
 
+#$2a$10$NJOqy0Yh4CxES5GsTDBE1.Smz3QvJfdMHKoAnrxUpYuQ2HSZNuSa6
 #$2a$10$J3vkiHpIlVpQOMw7s6C0Xu1SZprojTcfvcWQQP4WMOLG9crRW6/8a
