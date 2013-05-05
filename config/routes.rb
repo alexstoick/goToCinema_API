@@ -14,13 +14,10 @@ Simple::Application.routes.draw do
 	get "gmaps_distance/wrong_params"
 	get "open_maps/wrong_params"
 
-	match 'checkToken/', :to => "token#check"
-	match 'logout/', :to => "sessions#destroy", :as => :logout
-	match 'login/', :to => "sessions#create", :via => :post
-	match 'login/', :to => "sessions#new", :as => :login
-	match 'user/', :to => "users#create", :via => :post
+	match 'user/checkToken/', :to => "token#check"
+	match 'user/logout/', :to => "sessions#destroy", :as => :logout
+	match 'user/login/', :to => "sessions#create", :via => :post
 	match 'user/', :to => "users#index", :as => :users
-	match 'user/new', :to => "users#new", :as => :new_user
 	match 'user/:id', :to => "users#view", :as => :user
 
 	match "/parser" => "parser#index"

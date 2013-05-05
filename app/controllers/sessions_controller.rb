@@ -41,6 +41,3 @@ class SessionsController < ApplicationController
 		end
 	end
 end
-
-#$2a$10$NJOqy0Yh4CxES5GsTDBE1.Smz3QvJfdMHKoAnrxUpYuQ2HSZNuSa6
-#$2a$10$J3vkiHpIlVpQOMw7s6C0Xu1SZprojTcfvcWQQP4WMOLG9crRW6/8a

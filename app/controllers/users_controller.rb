@@ -10,6 +10,12 @@ class UsersController < ApplicationController
 
 	def view
 		@user = User.find ( params[:id] )
+		@user.authToken = nil
+		@user.password_digest = nil
+		respond_to do |format|
+			format.html # view.html.erb
+			format.json { render json: { "username" => @user.username , "email" => @user.email } }
+		end
 	end
 
 	def new
