@@ -1,0 +1,42 @@
+HOST: http://www.google.com/
+
+--- Sample API v2 ---
+---
+Welcome to the our sample API documentation. All comments can be written in (support [Markdown](http://daringfireball.net/projects/markdown/syntax) syntax)
+---
+
+--
+Users
+The following is a section of resources related to the users & their tokens
+--
+Authenticates a user to the system, has <b> 3 </b> possible return values. It also generates an <b>AUTH_KEY</b> which is
+stored in the database until the user is logged out.
+POST /user/login{?username,password}
+< 200
+< Content-Type: application/json
+{ "possible_responses": [
+    { "loggedIn" => true , "key" => AUTH_KEY },
+    { "error" => "email"},
+    { "error" => "password"}
+] }
+
+Logs the user out of the system, has <b>3</b> possible reponses. It deleted the <b>AUTH_KEY</b> from the database.
+GET /user/logout{?token}
+< 200
+< Content-Type: application/json
+{ "possible_responses": [
+    { "error" => "Token does not exist"},
+    { "error" => "Expecting a token parameter"},
+    { "logout" => true }
+] }
+
+Check if a token is valid, has <b>3</b> possible reponses.
+GET /user/checkToken{?token}
+< 200
+< Content-Type: application/json
+{ "possible_responses": [
+    { "token" => false },
+    { "error" => "Expecting a token parameter"},
+    { "token" => true }
+] }
+
