@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 	def index
 		@users = User.all
+		@users.delete_if {|hash| hash["id"] == session[:user_id]}
 		respond_to do |format|
 			format.html # index.html.erb
 			format.json { render json: @users }
