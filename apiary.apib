@@ -99,3 +99,23 @@ GET /user/checkToken{?token}
     { "error" => "Expecting a token parameter"},
     { "token" => true }
 ] }
+
+--
+Distance calculator 
+This provides with 3 methods of calculating the distance between the user and the cinemas.
+--
+
+GET /googleMaps{?lat&lng}
+< 200
+< Content-Type: application/json
+[ { "distance" : "7.9km" , "duration" : 1495 ,"name" : "Movieplex" } ]
+
+GET /openMaps{?lat&lng}
+< 200
+< Content-Type: application/json
+[ { "distance" : "7.9km" , "duration" : 1495 ,"name" : "Movieplex" } ]
+
+GET /{?lat&lng}
+< 200
+< Content-Type: application/json
+[ { "distance" : "7.9km" , "duration" : 1495 ,"name" : "Movieplex" } ]
