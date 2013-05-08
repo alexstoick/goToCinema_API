@@ -25,14 +25,13 @@ stored in the database until the user is logged out.
     <tr>
         <td>false</td>
         <td>-</td>
-        <td>email</td>
+        <td>"email"</td>
     </tr>
     <tr>
         <td>false</td>
         <td>-</td>
-        <td>password</td>
+        <td>"password"</td>
     </tr>
-    
 </table>
 POST /user/login{?username,password}
 < 200
@@ -44,6 +43,24 @@ POST /user/login{?username,password}
 ] }
 
 Logs the user out of the system, has <b>3</b> possible reponses. It deleted the <b>AUTH_KEY</b> from the database.
+<table>
+    <tr>
+        <td><b>logout</b></td>
+        <td><b>error</b></td>
+    </tr>
+    <tr>
+        <td>true</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>false</td>
+        <td>"Token does not exist"</td>
+    </tr>
+    <tr>
+        <td>false</td>
+        <td>"Expecting a token parameter"</td>
+    </tr>
+</table>
 GET /user/logout{?token}
 < 200
 < Content-Type: application/json
@@ -54,6 +71,26 @@ GET /user/logout{?token}
 ] }
 
 Check if a token is valid, has <b>3</b> possible reponses.
+
+<table>
+    <tr>
+        <td><b>token</b></td>
+        <td><b>error</b></td>
+    </tr>
+    <tr>
+        <td>true</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>false</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>false</td>
+        <td>"Expecting a token parameter"</td>
+    </tr>
+</table>
+
 GET /user/checkToken{?token}
 < 200
 < Content-Type: application/json
@@ -62,4 +99,3 @@ GET /user/checkToken{?token}
     { "error" => "Expecting a token parameter"},
     { "token" => true }
 ] }
-
