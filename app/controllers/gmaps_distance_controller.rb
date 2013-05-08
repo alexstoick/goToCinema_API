@@ -3,7 +3,7 @@ class GmapsDistanceController < ApplicationController
 	def index
 
 		if ! ( params.has_key?(:lat) && params.has_key?(:lng) )
-			redirect_to :action => "amazing"
+			redirect_to :action => "wrong_params"
 		else
 			lat = params[:lat]
 			lng = params[:lng]
