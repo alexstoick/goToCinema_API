@@ -4,9 +4,26 @@ class MoviesController < ApplicationController
   def index
     @movies = Movie.all
 
+    json= []
+
+    @movies.each do |movie|
+    	movie.showtimes.each do |showtime|
+    		json.push ( {
+    					"titluRo"	=> movie.titluRo,
+    					"titluEn"	=> movie.titluEn,
+    					"regizor"	=> movie.regizor,
+    					"actori"	=> movie.actori	,
+    					"nota"		=> movie.nota	,
+    					"gen"		=> movie.gen	,
+    					"image"		=> movie.image	,
+    					"ora"		=> showtime.hour,
+    					"cinema"	=> showtime.place } )
+
+    	end
+    end
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @movies }
+      format.json { render json: json }
     end
   end
 
@@ -17,7 +34,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @movie }
+      format.json { render json: { "movie" => @movie , "showtimes" => @movie.showtimes} }
     end
   end
 
