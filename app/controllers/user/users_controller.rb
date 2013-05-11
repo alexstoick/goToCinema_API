@@ -16,10 +16,9 @@ class User::UsersController < ApplicationController
 	end
 
 	def search
-		#@user = User.where("nume like '?%' ", params[:nume])
 		search_term = params[:q]
 		result = User.where( "nume like ? OR prenume like ? ", "%#{search_term}%" , "%#{search_term}%")
-		 			.select("nume, prenume, username")
+		 			.select("nume, prenume, username, id")
 		render json: result
 	end
 end
