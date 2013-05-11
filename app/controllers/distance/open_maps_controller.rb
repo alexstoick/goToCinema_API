@@ -55,7 +55,7 @@ class Distance::OpenMapsController < ApplicationController
 					parsed = JSON.parse ( content )
 					entry = {}
 					entry["name"] = cinema["name"]
-					entry["distance"] = parsed['distance'][1]
+					entry["distance"] = parsed['distance'][1].round(1).to_s + " km"
 					entry["duration"] = parsed['time'][1]
 					entry["lat"] = cinema["lat"]
 					entry["lng"] = cinema["lng"]

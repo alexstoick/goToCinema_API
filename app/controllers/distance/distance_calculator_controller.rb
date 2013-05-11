@@ -48,8 +48,8 @@ class Distance::DistanceCalculatorController < ApplicationController
 					distance = view_context.calcDist(user,u2)
 					entry = {}
 					entry["name"] = c["name"] ;
-					entry["distance"] = distance.to_s + "km"
-					entry["duration"] = ((distance*multiplier/60).round(0)).to_s + "min"
+					entry["distance"] = distance.to_s + " km"
+					entry["duration"] = ((distance*multiplier).round(0))
 					entry["lat"] = c["lat"]
 					entry["lng"] = c["lng"]
 					entries.push( entry )
