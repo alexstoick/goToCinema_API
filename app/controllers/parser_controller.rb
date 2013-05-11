@@ -60,6 +60,7 @@ class ParserController < ApplicationController
 
 				cinematografe.each do |cinematograf|
 					cinemaName = cinematograf.text
+					cinemaName = cinemaName.gsub(/[^0-9a-zA-Z :]/, '' )
 					length = cinematograf.parent.css("div").length
 					length1 = cinematograf.parent.parent.css("div").length
 					case length
