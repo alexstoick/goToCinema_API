@@ -1,8 +1,6 @@
 Simple::Application.routes.draw do
 
-	root :to => 'distance_calculator#index'
-
-	#resources :movies
+	root :to => 'movies#index'
 
 	match 'movies/', :to => "movies#index"
 	match 'movies/:id', :to => "movies#show"
