@@ -6,6 +6,32 @@ Welcome to the our sample API documentation. All comments can be written in (sup
 ---
 
 --
+Movies
+Related to the database & movie storage
+--
+
+Shows a list of all movies with their showtimes joined together
+GET /movies
+< 200
+< Content-Type: application/json
+[{"id":"etc", "titluRo":"etc" , "titluEn": "etc" , "regizor": "etc", "nota":"etc" , 
+    "image":"etc", "actori": "etc" , "cinema" : "etc" , "ora": "123" }]
+    
+
+Shows specific info about a movie
+GET /movies/{id}
+< 200
+< Content-Type: application/json
+[{"id":"etc", "titluRo":"etc" , "titluEn": "etc" , "regizor": "etc", "nota":"etc" , 
+    "image":"etc", "actori": "etc" }]
+
+Shows all the showtimes for {id} movie
+GET /movies/{id}/aparitii
+< 200
+< Content-Type: application/json
+[{ "place": "cinema", "hour":"ora" }]
+
+--
 Users
 The following is a section of resources related to the users & their tokens
 --
@@ -104,7 +130,13 @@ Searches the users for name/surname like the one supplied in the q paramater
 GET /user/search{?q}
 < 200
 < Content-Type: application/json
-[{"nume":"Stoica", prenume:"Alex", username:"alex"}]
+[{"nume":"Stoica", "prenume":"Alex", "username":"alex"}]
+
+Posts all the users posts.
+GET /user/{id}/posts
+< 200
+< Content-Type: application/json
+[{"content":"etc", "title":"etc"}]
 
 --
 Distance calculator 
