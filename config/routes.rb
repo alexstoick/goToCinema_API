@@ -2,7 +2,11 @@ Simple::Application.routes.draw do
 
 	root :to => 'distance_calculator#index'
 
-	resources :movies
+	#resources :movies
+
+	match 'movies/', :to => "movies#index"
+	match 'movies/:id', :to => "movies#show"
+	match 'movies/:id/aparitii', :to => "movies#aparitii"
 
 	get "parser/index"
 	get "parser/early_reload"
