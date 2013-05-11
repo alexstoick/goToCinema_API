@@ -1,4 +1,4 @@
-class TokenController < ApplicationController
+class User::TokenController < ApplicationController
 
 	def check
 		if ( params[:token].nil? )

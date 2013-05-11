@@ -1,6 +1,6 @@
 require 'bcrypt'
 
-class SessionsController < ApplicationController
+class User::SessionsController < ApplicationController
 
 	include BCrypt
 

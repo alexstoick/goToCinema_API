@@ -1,4 +1,4 @@
-class DistanceCalculatorController < ApplicationController
+class Distance::DistanceCalculatorController < ApplicationController
 	def index
 
 		if ! ( params.has_key?(:lat) && params.has_key?(:lng) )

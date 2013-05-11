@@ -1,4 +1,4 @@
-class GmapsDistanceController < ApplicationController
+class Distance::GmapsDistanceController < ApplicationController
 
 	def index
 

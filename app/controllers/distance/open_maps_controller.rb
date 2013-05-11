@@ -1,4 +1,4 @@
-class OpenMapsController < ApplicationController
+class Distance::OpenMapsController < ApplicationController
 	def index
 
 		if ! ( params.has_key?(:lat) && params.has_key?(:lng) )

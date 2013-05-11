@@ -8,28 +8,31 @@ Simple::Application.routes.draw do
 	match 'movies/:id', :to => "movies#show"
 	match 'movies/:id/aparitii', :to => "movies#aparitii"
 
-	get "parser/index"
+
 	get "parser/early_reload"
-	get "movie_list/index"
-	get "distance_calculator/index"
-	get "open_maps/index"
-	get "gmaps_distance/index"
-	get "distance_calculator/wrong_params"
-	get "gmaps_distance/wrong_params"
-	get "open_maps/wrong_params"
-
-
-	match 'user/search', :to => "users#search", :as => :search
-	match 'user/checkToken/', :to => "token#check"
-	match 'user/logout/', :to => "sessions#destroy", :as => :logout
-	match 'user/login/', :to => "sessions#create", :via => :post
-	match 'user/', :to => "users#index", :as => :users
-	match 'user/:id', :to => "users#view", :as => :user
 
 	match "/parser" => "parser#index"
-	match "/openMaps" => "open_maps#index"
-	match "/googleMaps" => "gmaps_distance#index"
-	match "/getMovies" => "movie_list#index"
+
+	namespace :user do
+		match '/search', :to => "users#search"
+		match 'checkToken/', :to => "token#check"
+		match 'logout/', :to => "sessions#destroy"
+		match 'login/', :to => "sessions#create", :via => :post
+		match '/', :to => "users#index"
+		match '/:id', :to => "users#view"
+		match '/:id/posts', :to => "users#posts"
+	end
+
+	namespace :distance do
+
+		match "/openMaps" => "open_maps#index"
+		match "/googleMaps" => "gmaps_distance#index"
+		match "/" => "distance_calculator#index"
+
+		get "distance_calculator/wrong_params"
+		get "gmaps_distance/wrong_params"
+		get "open_maps/wrong_params"
+	end
 
 	# The priority is based upon order of creation:
 	# first created -> highest priority.
