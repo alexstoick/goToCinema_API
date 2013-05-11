@@ -18,42 +18,45 @@ class Distance::GmapsDistanceController < ApplicationController
 
 			start = Time.now
 
-			urls = [
-				{ 'link' => 'http://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+'%2C'+lng+'&destinations=44.507402%2C26.090126&sensor=false'},
-				{ 'link' => 'http://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+'%2C'+lng+'&destinations=44.41956%2C26.126651&sensor=false'},
-				{ 'link' => 'http://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+'%2C'+lng+'&destinations=44.437716%2C26.069521&sensor=false'},
-				{ 'link' => 'http://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+'%2C'+lng+'&destinations=44.4346%2C26.096752&sensor=false'},
-				{ 'link' => 'http://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+'%2C'+lng+'&destinations=44.438216%2C26.114301&sensor=false'},
-				{ 'link' => 'http://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+'%2C'+lng+'&destinations=44.409052%2C26.086395&sensor=false'},
-				{ 'link' => 'http://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+'%2C'+lng+'&destinations=44.431445%2C26.053863&sensor=false'},
-				{ 'link' => 'http://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+'%2C'+lng+'&destinations=44.441101%2C26.099904&sensor=false'},
-				{ 'link' => 'http://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+'%2C'+lng+'&destinations=44.442391%2C26.099133&sensor=false'},
-				{ 'link' => 'http://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+'%2C'+lng+'&destinations=44.442391%2C26.099133&sensor=false'},
-				{ 'link' => 'http://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+'%2C'+lng+'&destinations=44.431445%2C26.053863&sensor=false'},
-				{ 'link' => 'http://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+'%2C'+lng+'&destinations=44.431445%2C26.053863&sensor=false'},
-				{ 'link' => 'http://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+'%2C'+lng+'&destinations=44.396106%2C26.123128&sensor=false'},
-				{ 'link' => 'http://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+'%2C'+lng+'&destinations=44.507058%2C26.090893&sensor=false'},
-				{ 'link' => 'http://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+'%2C'+lng+'&destinations=44.374388%2C26.119904&sensor=false'},
-				{ 'link' => 'http://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+'%2C'+lng+'&destinations=44.434266%2C26.102266&sensor=false'},
-				{ 'link' => 'http://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+'%2C'+lng+'&destinations=44.438216%2C26.114301&sensor=false'},
-				{ 'link' => 'http://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+'%2C'+lng+'&destinations=44.444685%2C26.097327&sensor=false'},
-				{ 'link' => 'http://maps.googleapis.com/maps/api/distancematrix/json?origins='+lat+'%2C'+lng+'&destinations=44.428742%2C26.15415&sensor=false'}
+			cinemas = [
+				{ 'lat' =>44.507402, 'lng' => 26.090126, 'name' =>'Grand Cinema Digiplex' },
+				{ 'lat' =>44.419560, 'lng' => 26.126651, 'name' =>'Hollywood Multiplex' },
+				{ 'lat' =>44.437716, 'lng' => 26.069521, 'name' =>'Glendale Studio' },
+				{ 'lat' =>44.434600, 'lng' => 26.096752, 'name' =>'Corso' },
+				{ 'lat' =>44.438216, 'lng' => 26.114301, 'name' =>'Movieplex Cinema Plaza' },
+				{ 'lat' =>44.409052, 'lng' => 26.086395, 'name' =>'The Light Cinema' },
+				{ 'lat' =>44.431445, 'lng' => 26.053863, 'name' =>'Romtelecom IMAX' },
+				{ 'lat' =>44.441101, 'lng' => 26.099904, 'name' =>'Scala' },
+				{ 'lat' =>44.442391, 'lng' => 26.099133, 'name' =>'Patria' },
+				{ 'lat' =>44.442391, 'lng' => 26.099133, 'name' =>'Caffe Cinema 3D Patria' },
+				{ 'lat' =>44.431445, 'lng' => 26.053863, 'name' =>'Cinema City Cotroceni' },
+				{ 'lat' =>44.431445, 'lng' => 26.053863, 'name' =>'Cinema City Cotroceni VIP' },
+				{ 'lat' =>44.396106, 'lng' => 26.123128, 'name' =>'Cinema City Sun Plaza' },
+				{ 'lat' =>44.507058, 'lng' => 26.090893, 'name' =>'Grand VIP Studios' },
+				{ 'lat' =>44.374388, 'lng' => 26.119904, 'name' =>'Movie Vip Caffe' },
+				{ 'lat' =>44.434266, 'lng' => 26.102266, 'name' =>'CinemaPRO' },
+				{ 'lat' =>44.438216, 'lng' => 26.114301, 'name' =>'Europa' },
+				{ 'lat' =>44.444685, 'lng' => 26.097327, 'name' =>'Studio' },
+				{ 'lat' =>44.428742, 'lng' => 26.15415, 'name' =>'Gloria' }
 			]
+			linkOriginal = 'http://maps.googleapis.com/maps/api/distancematrix/json?sensor=false&origins='+lat+'%2C'+lng+'&destinations='
 
-			th = []
-			i = 0
-			urls.each do |u|
+			cinemas.each do |cinema|
 				th[i] =Thread.new do
-					u['content'] = Net::HTTP.get( URI.parse(u['link']) )
-					parsed = JSON.parse ( u['content'] )
+					link = linkOriginal + cinema["lat"].to_s + "%2C" + cinema["lng"].to_s ;
+					content = Net::HTTP.get( URI.parse(link) )
+					parsed = JSON.parse ( content )
 					entry = {}
-
+					entry["name"] = cinema["name"]
 					entry["distance"] = parsed['rows'][0]['elements'][0]['distance']['text']
 					entry["duration"] = parsed['rows'][0]['elements'][0]['duration']['value']
+					entry["lat"] = cinema["lat"]
+					entry["lng"] = cinema["lng"]
 					entries.push( entry )
-				end
+					end
 				i=i+1
 			end
+
 			th.each { |t| t.join }
 			encoded = JSON.generate ( entries )
 			render :text => encoded

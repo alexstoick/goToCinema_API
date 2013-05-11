@@ -50,10 +50,11 @@ class Distance::OpenMapsController < ApplicationController
 					content = Net::HTTP.get( URI.parse(link) )
 					parsed = JSON.parse ( content )
 					entry = {}
-					#puts parsed['distance'][1] , parsed['time'][1]
 					entry["name"] = cinema["name"]
 					entry["distance"] = parsed['distance'][1]
 					entry["duration"] = parsed['time'][1]
+					entry["lat"] = cinema["lat"]
+					entry["lng"] = cinema["lng"]
 					entries.push( entry )
 					end
 				i=i+1

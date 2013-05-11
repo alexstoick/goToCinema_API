@@ -46,6 +46,8 @@ class Distance::DistanceCalculatorController < ApplicationController
 					entry["name"] = c["name"] ;
 					entry["distance"] = distance.to_s + "km"
 					entry["duration"] = ((distance*multiplier/60).round(0)).to_s + "min"
+					entry["lat"] = cinema["lat"]
+					entry["lng"] = cinema["lng"]
 					entries.push( entry )
 			end
 
