@@ -34,7 +34,11 @@ class Distance::DistanceCalculatorController < ApplicationController
 					{ 'lat' =>44.434266, 'lng' => 26.102266, 'name' =>'CinemaPRO' },
 					{ 'lat' =>44.438216, 'lng' => 26.114301, 'name' =>'Europa' },
 					{ 'lat' =>44.444685, 'lng' => 26.097327, 'name' =>'Studio' },
-					{ 'lat' =>44.428742, 'lng' => 26.15415, 'name' =>'Gloria' }
+					{ 'lat' =>44.428742, 'lng' => 26.15415, 'name' =>'Gloria' },
+					{'lat' => 44.434011, 'lng' => 26.096861, 'name' => 'Cinemateca Eforie' },
+					{'lat' => 44.454662, 'lng' => 26.084064, 'name' => 'NCRR' },
+					{'lat' => 44.446563, 'lng' => 26.104480, 'name' => 'Elvira Popescu' },
+					{'lat' => 44.437159, 'lng' => 26.096134, 'name' => 'Cinemateca Union' }
 				]
 
 			cinemas.each do |c|
@@ -46,8 +50,8 @@ class Distance::DistanceCalculatorController < ApplicationController
 					entry["name"] = c["name"] ;
 					entry["distance"] = distance.to_s + "km"
 					entry["duration"] = ((distance*multiplier/60).round(0)).to_s + "min"
-					entry["lat"] = cinema["lat"]
-					entry["lng"] = cinema["lng"]
+					entry["lat"] = c["lat"]
+					entry["lng"] = c["lng"]
 					entries.push( entry )
 			end
 
