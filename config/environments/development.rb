@@ -7,8 +7,8 @@ Simple::Application.configure do
 	config.cache_classes = false
 
 	config.after_initialize do
-		ActiveRecord::Base.logger = Rails.logger.clone
-		ActiveRecord::Base.logger.level = Logger::INFO
+		# ActiveRecord::Base.logger = Rails.logger.clone
+		# ActiveRecord::Base.logger.level = Logger::INFO
 	end
 
 end
