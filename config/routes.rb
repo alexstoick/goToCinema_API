@@ -12,15 +12,21 @@ Simple::Application.routes.draw do
 	match "/parser" => "parser#index"
 
 	namespace :user do
-		match '/search', :to => "users#search"
+
 		match 'checkToken/', :to => "token#check"
+
 		match 'logout/', :to => "sessions#destroy"
 		match 'login/', :to => "sessions#create", :via => :post
+		match '/post', :to => "posts#create", :via => :post
+
+		match '/search', :to => "users#search"
 		match '/', :to => "users#index"
 		match '/:id', :to => "users#view"
 		match '/:id/posts', :to => "users#posts"
 		match '/:id/wall', :to => "users#wall"
 	end
+
+
 
 	namespace :distance do
 

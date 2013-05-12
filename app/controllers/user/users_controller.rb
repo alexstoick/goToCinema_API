@@ -26,7 +26,6 @@ class User::UsersController < ApplicationController
 			entry [ "title" ] = post.title
 			json.push ( entry )
 		end
-		#render json: user.wall_posts.select("title, content, sender_id")
 		render json: json
 	end
 
