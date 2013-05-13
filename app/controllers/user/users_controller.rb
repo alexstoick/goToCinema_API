@@ -12,12 +12,19 @@ class User::UsersController < ApplicationController
 
 	def posts
 		user = User.find(params[:id])
-		render json: user.posts.select("title, content, receiver_id")
+		render json: user.to_json( :only => [] , :methods => [:fullname] ,
+									:include => { :posts => { :only => [ :title , :content, :receiver_id] } } )
+		#render json: user.posts.select("title, content, receiver_id")
 	end
 	def wall
 		user = User.find(params[:id])
-		render json: user.to_json(  :only => [ :nume , :prenume, :id],
-									:include =>  { :wall_posts => { :only => [ :title , :content ] } } )
+		#:only => [ :nume , :prenume, :id],
+		render json: user.to_json( :only => [:id], :methods => [:fullname] ,
+									:include =>  { :wall_posts => {
+										:include => { :sender => { :only => [] , :methods => [:fullname] } },
+										:only => [ :title , :content ] } } )
+
+
 		return
 	end
 
@@ -28,3 +35,6 @@ class User::UsersController < ApplicationController
 		render json: result
 	end
 end
+  # konata.to_json(:include => { :posts => {
+  #                                :include => { :comments => { :only => :body } },
+  #                                :only => :title } })
