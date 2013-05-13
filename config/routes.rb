@@ -26,6 +26,9 @@ Simple::Application.routes.draw do
 		match '/:id/wall', :to => "users#wall"
 	end
 
+	match 'users/:id', :to => "User::users#view"
+	# match 'users/:id/posts', :to => "users#posts"
+	# match 'users/:id/wall', :to => "users#wall"
 
 
 	namespace :distance do

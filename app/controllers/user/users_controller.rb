@@ -16,17 +16,9 @@ class User::UsersController < ApplicationController
 	end
 	def wall
 		user = User.find(params[:id])
-		json = []
-		user.wall_posts.each do |post|
-			sender = post.sender
-			entry = {}
-			entry [ "sender_name" ] = sender["nume"] + " " + sender["prenume"]
-			entry [ "sender_id" ] = sender["id"]
-			entry [ "content" ] = post.content
-			entry [ "title" ] = post.title
-			json.push ( entry )
-		end
-		render json: json
+		render json: user.to_json(  :only => [ :nume , :prenume, :id],
+									:include =>  { :wall_posts => { :only => [ :title , :content ] } } )
+		return
 	end
 
 	def search
