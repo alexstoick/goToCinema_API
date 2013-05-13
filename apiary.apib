@@ -136,7 +136,23 @@ Posts all the users posts.
 GET /user/{id}/posts
 < 200
 < Content-Type: application/json
-[{"content":"etc", "title":"etc"}]
+{"fullname":"Stoica Alex",
+    "posts":[
+        {"content":"mare baws","receiver_id":2,"title":"test2"},
+        {"content":"i haz contents","receiver_id":1,"title":"dayum title"}
+        ]
+}
+
+Posts all the entries for a user's wall
+GET /user/{id}/wall
+< 200
+< Content-Type: application/json
+{"id":1,"fullname":"Stoica Alex",
+    "wall_posts":[
+        {"content":"content postare","title":"titlu postare","sender":{"fullname":"Stoica Vlad"}},
+        {"content":"i haz contents","title":"dayum title","sender":{"fullname":"Stoica Alex"}}
+        ]
+}
 
 --
 Distance calculator 
