@@ -14,8 +14,29 @@ Shows a list of all movies with their showtimes joined together
 GET /movies
 < 200
 < Content-Type: application/json
-[{"id":"etc", "titluRo":"etc" , "titluEn": "etc" , "regizor": "etc", "nota":"etc" , 
-    "image":"etc", "actori": "etc" , "cinema" : "etc" , "ora": "123" }]
+[{"actori":"Cu:Leonardo DiCaprio,Carey Mulligan,Tobey Maguire","gen":"Gen film:Dramă,Romantic,Dragoste","id":1,
+    "image":"http://static.cinemagia.ro/img/resize/db/movie/03/26/48/the-great-gatsby-763698l-80x0-w-49fa6bd0.jpg",
+    "nota":"Notă 8.0 / Imdb 7.5","regizor":"Regizor:Baz Luhrmann",
+    "titluEn":"The Great Gatsby (2013)",
+    "titluRo":"Marele Gatsby","showtimes":[]},
+    {"actori":"Cu:Chris Pine,Zoe Saldana,Zachary Quinto,John Cho,Benedict Cumberbatch",
+    "gen":"Gen film:Acţiune,Aventuri,SF","id":2,
+    "image":"http://static.cinemagia.ro/img/resize/db/movie/48/84/10/star-trek-into-darkness-941561l-80x0-w-6bdebb4b.jpg",
+    "nota":"Notă 8.3 / Imdb 8.4","regizor":"Regizor:J.J. Abrams","titluEn":"Star Trek Into Darkness  (2013)",
+    "titluRo":"Star Trek În întuneric 3D",
+    "showtimes":[
+        {"hour":"20:05","place":"Grand Cinema Digiplex"},
+        {"hour":"21:30","place":"Hollywood Multiplex"},
+        {"hour":"21:45","place":"Movieplex Cinema Plaza"},
+        {"hour":"21:00","place":"Cinema City Cotroceni"},
+        {"hour":"21:00","place":"Cinema City Cotroceni VIP"},
+        {"hour":"20:30","place":"Cinema City Sun Plaza"},
+        {"hour":"11:50","place":"Romtelecom IMAX"},
+        {"hour":"17:20","place":"Romtelecom IMAX"},
+        {"hour":"20:00","place":"Romtelecom IMAX"},
+        {"hour":"22:40","place":"Romtelecom IMAX"}
+        ]
+}]
     
 
 Shows specific info about a movie
