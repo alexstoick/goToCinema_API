@@ -1,4 +1,4 @@
-HOST: http://www.google.com/
+HOST: http://cinemadistance.eu01.aws.af.cm
 
 --- goToCinema API ---
 ---
@@ -111,11 +111,14 @@ stored in the database until the user is logged out.
 POST /user/login{?username,password}
 < 200
 < Content-Type: application/json
-{ "possible_responses": [
-    { "loggedIn" => true , "key" => AUTH_KEY },
-    { "error" => "email"},
-    { "error" => "password"}
-] }
+{ 
+    "possible_responses": 
+    [
+        { "loggedIn" => true , "key" => AUTH_KEY },
+        { "error" => "email"},
+        { "error" => "password"}
+    ]
+}
 
 Logs the user out of the system, has <b>3</b> possible reponses. It deleted the <b>AUTH_KEY</b> from the database.
 <table>
@@ -139,11 +142,14 @@ Logs the user out of the system, has <b>3</b> possible reponses. It deleted the 
 GET /user/logout{?token}
 < 200
 < Content-Type: application/json
-{ "possible_responses": [
-    { "error" => "Token does not exist"},
-    { "error" => "Expecting a token parameter"},
-    { "logout" => true }
-] }
+{
+    "possible_responses": 
+    [
+        { "error" => "Token does not exist"},
+        { "error" => "Expecting a token parameter"},
+        { "logout" => true }
+    ] 
+}
 
 Check if a token is valid, has <b>3</b> possible reponses.
 
@@ -169,38 +175,72 @@ Check if a token is valid, has <b>3</b> possible reponses.
 GET /user/checkToken{?token}
 < 200
 < Content-Type: application/json
-{ "possible_responses": [
-    { "token" => false },
-    { "error" => "Expecting a token parameter"},
-    { "token" => true }
-] }
+{ 
+    "possible_responses": 
+    [
+        { "token" => false },
+        { "error" => "Expecting a token parameter"},
+        { "token" => true }
+    ] 
+}
 
 Searches the users for name/surname like the one supplied in the q paramater
 GET /user/search{?q}
 < 200
 < Content-Type: application/json
-[{"nume":"Stoica", "prenume":"Alex", "username":"alex"}]
+[
+    {
+        "id":1,
+        "nume":"Stoica",
+        "prenume":"Alex",
+        "username":"alex"
+    },
+    {
+        "id":2,
+        "nume":"Stoica",
+        "prenume":"Vlad",
+        "username":"vlad"
+    }
+]
 
 Posts all the users posts.
 GET /user/{id}/posts
 < 200
 < Content-Type: application/json
-{"fullname":"Stoica Alex",
+{
+    "fullname":"Stoica Alex",
     "posts":[
-        {"content":"mare baws","receiver_id":2,"title":"test2"},
-        {"content":"i haz contents","receiver_id":1,"title":"dayum title"}
-        ]
+        {
+            "content":"mare baws",
+            "receiver_id":2,
+            "title":"test2"
+        },
+        {
+            "content":"i haz contents",
+            "receiver_id":1,
+            "title":"dayum title"
+        }]
 }
 
 Posts all the entries for a user's wall
 GET /user/{id}/wall
 < 200
 < Content-Type: application/json
-{"id":1,"fullname":"Stoica Alex",
+{
+    "id":1,
+    "fullname":"Stoica Alex",
     "wall_posts":[
-        {"content":"content postare","title":"titlu postare","sender":{"fullname":"Stoica Vlad"}},
-        {"content":"i haz contents","title":"dayum title","sender":{"fullname":"Stoica Alex"}}
-        ]
+        {
+            "content":"content postare",
+            "title":"titlu postare",
+            "sender":{"fullname":"Stoica Vlad"}
+        },
+        {
+            "content":"i haz contents",
+            "title":"dayum title",
+            "sender":{"fullname":"Stoica Alex"}
+            
+        }]
 }
 
 --
