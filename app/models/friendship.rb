@@ -13,4 +13,11 @@ class Friendship < ActiveRecord::Base
 
 	scope :pending, :conditions => {:status => 0}
 	scope :accepted, :conditions => {:status => 1}
+
+	def pending
+		return self.status = 0
+	end
+	def accepted
+		return self.status = 1
+	end
 end

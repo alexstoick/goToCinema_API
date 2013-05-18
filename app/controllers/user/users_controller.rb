@@ -31,4 +31,21 @@ class User::UsersController < ApplicationController
 		 			.select("nume, prenume, username, id")
 		render json: result
 	end
+
+
+	def friends
+		user = User.find(params[:id])
+
+		render json: user.to_json( :only => [] , :methods => [:fullname] ,
+									:include => { :friends => { :only => [] , :methods => [:fullname] } } )
+	end
+
+	def pending
+
+		user = User.find(params[:id])
+		pending = user.friendships.pending
+		render json: pending.to_json( :only => [] ,
+								:include => { :friend => { :only => [] , :methods => [:fullname] } } )
+	end
+
 end
