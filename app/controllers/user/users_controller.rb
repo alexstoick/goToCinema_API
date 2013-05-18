@@ -37,7 +37,10 @@ class User::UsersController < ApplicationController
 		user = User.find(params[:id])
 
 		render json: user.to_json( :only => [] , :methods => [:fullname] ,
-									:include => { :friends => { :only => [] , :methods => [:fullname] } } )
+									:include => [
+										{ :friends => { :only => [] , :methods => [:fullname] } },
+										{ :inverse_friends => { :only => [] , :methods => [:fullname] } }
+										] )
 	end
 
 	def pending
