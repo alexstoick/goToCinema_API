@@ -114,7 +114,7 @@ POST /user/login{?username,password}
 { 
     "possible_responses": 
     [
-        { "loggedIn" => true , "key" => AUTH_KEY },
+        { "loggedIn" => true , "key" => AUTH_KEY , "user_id" => user.id },
         { "error" => "email"},
         { "error" => "password"}
     ]
