@@ -18,9 +18,9 @@ class User::UsersController < ApplicationController
 
 	def wall
 		user = User.find(params[:id])
-		render json: user.to_json( :only => [:id], :methods => [:fullname] ,
+		render json: user.to_json( :only => [:id , :image , :fullname ], :methods => [:fullname] ,
 									:include =>  { :wall_posts => {
-										:include => { :sender => { :only => [ :id ] , :methods => [:fullname] } },
+										:include => { :sender => { :only => [ :id , :image ] , :methods => [:fullname] } },
 										:only => [ :title , :content ] } } )
 	end
 
@@ -37,8 +37,8 @@ class User::UsersController < ApplicationController
 
 		render json: user.to_json( :only => [] , :methods => [:fullname] ,
 									:include => [
-										{ :friends => { :only => [ :id ] , :methods => [:fullname] } },
-										{ :inverse_friends => { :only => [ :id ] , :methods => [:fullname] } }
+										{ :friends => { :only => [ :id , :image ] , :methods => [:fullname] } },
+										{ :inverse_friends => { :only => [ :id , :image ] , :methods => [:fullname] } }
 										] )
 	end
 
@@ -47,7 +47,7 @@ class User::UsersController < ApplicationController
 		user = User.find(params[:id])
 		pending = user.friendships.pending
 		render json: pending.to_json( :only => [] ,
-								:include => { :friend => { :only => [] , :methods => [:fullname] } } )
+								:include => { :friend => { :only => [ :id, :image] , :methods => [:fullname] } } )
 	end
 
 end
