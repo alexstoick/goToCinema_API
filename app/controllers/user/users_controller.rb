@@ -18,10 +18,9 @@ class User::UsersController < ApplicationController
 
 	def wall
 		user = User.find(params[:id])
-		#:only => [ :nume , :prenume, :id],
 		render json: user.to_json( :only => [:id], :methods => [:fullname] ,
 									:include =>  { :wall_posts => {
-										:include => { :sender => { :only => [] , :methods => [:fullname] } },
+										:include => { :sender => { :only => [ :id ] , :methods => [:fullname] } },
 										:only => [ :title , :content ] } } )
 	end
 
@@ -38,8 +37,8 @@ class User::UsersController < ApplicationController
 
 		render json: user.to_json( :only => [] , :methods => [:fullname] ,
 									:include => [
-										{ :friends => { :only => [] , :methods => [:fullname] } },
-										{ :inverse_friends => { :only => [] , :methods => [:fullname] } }
+										{ :friends => { :only => [ :id ] , :methods => [:fullname] } },
+										{ :inverse_friends => { :only => [ :id ] , :methods => [:fullname] } }
 										] )
 	end
 
