@@ -256,6 +256,46 @@ POST /user/post{?token,title,content,receiver_id}
     ] 
 }
 
+Posts all friends of a user
+GET /user/{id}/friends
+< 200
+< Content-Type: application/json
+{
+    "fullname":"Stoica Alex",
+    "friends":[
+        {
+            "id":2,
+            "image":"http://placehold.it/350x250",
+            "fullname":"Stoica Vlad"
+        },
+        {
+            "id":3,
+            "image":"http://placehold.it/350x250",
+            "fullname":"test nope"
+        }],
+    "inverse_friends":[
+        {
+            "id":4,
+            "image":"http://placehold.it/350x250",
+            "fullname":"Clapa Alex"
+        }]
+}
+
+Posts all pending friend requets of a user
+GET /user/{id}/pending
+< 200
+< Content-Type: application/json
+[
+    {
+        "friend":
+        {
+            "id":3,
+            "image":"http://placehold.it/350x250",
+            "fullname":"test nope"    
+        }    
+    }
+]
+
 
 --
 Distance calculator 
