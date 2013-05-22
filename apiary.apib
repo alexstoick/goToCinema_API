@@ -243,6 +243,20 @@ GET /user/{id}/wall
         }]
 }
 
+Create a new post from user authed by the token to the receiver
+POST /user/post{?token,title,content,receiver_id}
+< 200
+< Content-Type: application/json
+{ 
+    "possible_responses": 
+    [
+        { "error" => "Wrong params" },
+        { "error" => "Invalid authToken"},
+        { "success" => true }
+    ] 
+}
+
+
 --
 Distance calculator 
 This provides with 3 methods of calculating the distance between the user and the cinemas.
