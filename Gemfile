@@ -20,6 +20,6 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 
 gem 'uglifier', '>= 1.0.3'
-gem 'therubyracer'
+#gem 'therubyracer'
 gem 'jquery-rails'
-gem 'unicorn-rails'
+#gem 'unicorn-rails'

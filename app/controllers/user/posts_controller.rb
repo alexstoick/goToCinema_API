@@ -21,7 +21,7 @@ class User::PostsController < ApplicationController
 		post.content = params[:content]
 		post.save!
 
-		render :json => { "ok" => post.new_record? }
+		render :json => { "success" => true }
 	end
 
 end
