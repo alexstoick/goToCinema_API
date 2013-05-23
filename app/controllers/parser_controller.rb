@@ -44,6 +44,9 @@ class ParserController < ApplicationController
 				actori = actori.gsub( /\s\s+/ , '' )
 				regizor = regizor.gsub( /\s\s+/ , '' )
 
+				actori = actori.gsub( "," , ", ")
+				actori = actori.gsub( ":" , ": ")
+
 				movie_ids = movie_ids + 1
 				intrare = Movie.new
 				intrare.id = movie_ids

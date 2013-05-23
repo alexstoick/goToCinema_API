@@ -24,8 +24,8 @@ Simple::Application.routes.draw do
 		match '/:id', :to => "users#view"
 		match '/:id/posts', :to => "users#posts"
 		match '/:id/wall', :to => "users#wall"
-		match '/:id/friends', :to => "users#friends"
-		match '/:id/pending', :to => "users#pending"
+		match '/:id/friends', :to => "friends#friends"
+		match '/:id/pending', :to => "friends#pending"
 	end
 
 	match 'users/:id', :to => "User::users#view"
