@@ -18,7 +18,7 @@ class User::UsersController < ApplicationController
 
 	def wall
 		user = User.find(params[:id])
-		render json: user.to_json( :only => [:id , :image , :fullname ], :methods => [:fullname] ,
+		render json: user.to_json( :only => [:id , :image , :DOB , :created_at ], :methods => [:fullname] ,
 									:include =>  { :wall_posts => {
 										:include => { :sender => { :only => [ :id , :image ] , :methods => [:fullname] } },
 										:only => [ :title , :content ] } } )
