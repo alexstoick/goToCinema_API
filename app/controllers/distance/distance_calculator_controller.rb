@@ -38,7 +38,8 @@ class Distance::DistanceCalculatorController < ApplicationController
 					{'lat' => 44.434011, 'lng' => 26.096861, 'name' => 'Cinemateca Eforie' },
 					{'lat' => 44.454662, 'lng' => 26.084064, 'name' => 'NCRR' },
 					{'lat' => 44.446563, 'lng' => 26.104480, 'name' => 'Elvira Popescu' },
-					{'lat' => 44.437159, 'lng' => 26.096134, 'name' => 'Cinemateca Union' }
+					{'lat' => 44.437159, 'lng' => 26.096134, 'name' => 'Cinemateca Union' },
+					{'lat' => 44.434835, 'lng' => 26.094986, 'name' => 'Instituto Cervantes' }
 				]
 
 			cinemas.each do |c|
