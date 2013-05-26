@@ -16,6 +16,7 @@ class User::SessionsController < ApplicationController
 		if ( user && user.authenticate( params[:password] ) )
 			session[:user_id] = user.id
 			key = Password.create( params[:username]+params[:password] )
+			response.headers["key"] = key
 			render json: { "loggedIn" => true , "user_id" => user.id , "key" => key }
 			user.authToken = key
 			user.save!
