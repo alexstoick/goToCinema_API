@@ -1,8 +1,8 @@
 class User::FriendsController < ApplicationController
 
 	def friends
-		friendships = User.find(params[:id]).friendships.accepted
-		inverse_friendships = User.find(params[:id]).inverse_friendships.accepted
+		friendships = User.find(params[:id] ).friendships.accepted
+		inverse_friendships = User.find(params[:id] ).inverse_friendships.accepted
 
 		friends = []
 

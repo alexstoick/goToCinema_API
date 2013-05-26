@@ -1,11 +1,11 @@
 class MoviesController < ApplicationController
 
   def index
-    movies = Movie.all
+    movies = Movie.includes ( :showtimes )
 
     json= []
 
-  	render json: movies.to_json( :only => [ :id , :actori , :gen , :image , :nota , :regizor , :titluEn , :titluRo] ,
+  	render json: movies.to_json( :except => [ :created_at , :updated_at ] ,# , :actori , :gen , :image , :nota , :regizor , :titluEn , :titluRo] ,
   					:include => { :showtimes => { :only => [ :hour , :place ] } } )
 
   end
