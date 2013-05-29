@@ -32,6 +32,8 @@ GEM
     bcrypt-ruby (3.0.1)
     bcrypt-ruby (3.0.1-x86-mingw32)
     builder (3.0.4)
+    bullet (4.6.0)
+      uniform_notifier
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -57,6 +59,7 @@ GEM
     multi_json (1.7.2)
     mysql2 (0.3.11)
     mysql2 (0.3.11-x86-mingw32)
+    newrelic_rpm (3.6.2.96)
     nokogiri (1.5.9)
     nokogiri (1.5.9-x86-mingw32)
     polyglot (0.3.3)
@@ -104,6 +107,7 @@ GEM
     uglifier (2.0.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    uniform_notifier (1.2.0)
 
 PLATFORMS
   ruby
@@ -111,9 +115,11 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
+  bullet
   coffee-rails (~> 3.2.1)
   jquery-rails
   mysql2
+  newrelic_rpm
   nokogiri
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
