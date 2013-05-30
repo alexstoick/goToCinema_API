@@ -27,9 +27,12 @@ Simple::Application.routes.draw do
 		match '/:id/friends', :to => "friends#friends"
 		match '/:id/pending', :to => "friends#pending"
 		match '/:id/lists' , :to => "lists#index"
+		match '/:id/favorites', :to => "favorites#add", :via => :post
+		match '/:id/favorites', :to => "favorites#remove", :via => :delete
+		match '/:id/favorites' , :to => "lists#favorites"
 	end
 
-	match 'users/:id', :to => "User::users#view"
+	# match 'users/:id', :to => "User::users#view"
 	# match 'users/:id/posts', :to => "users#posts"
 	# match 'users/:id/wall', :to => "users#wall"
 
