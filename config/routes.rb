@@ -29,7 +29,7 @@ Simple::Application.routes.draw do
 		match '/:id/lists' , :to => "lists#index"
 		match '/:id/favorites', :to => "favorites#add", :via => :post
 		match '/:id/favorites', :to => "favorites#remove", :via => :delete
-		match '/:id/favorites' , :to => "lists#favorites"
+		match '/:id/favorites' , :to => "favorites#show"
 	end
 
 
