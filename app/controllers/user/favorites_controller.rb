@@ -55,7 +55,13 @@ class User::FavoritesController < ApplicationController
 		list.movies.each do |movie|
 			movieEntry = {}
 			movieEntry [ "name" ] = movie [ "titluEn" ]
-			movieEntry [ "image" ] = movie [ "image" ]
+
+			link = movie [ "image" ]
+			link = link.gsub( 'resize/' , '' )
+			link_nou = ""
+			link_nou = link.split( '-80x0' )[0] + '.jpg'
+
+			movieEntry [ "image" ] = link_nou
 			movieEntry [ "id" ] = movie [ "id" ]
 			entries.push( movieEntry )
 		end
