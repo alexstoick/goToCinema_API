@@ -17,9 +17,9 @@ class User::UsersController < ApplicationController
 
 	def wall
 
-		user = User.where(:id => params[:id]).joins(:wall_posts).includes(:wall_posts).order('posts.created_at DESC')
+		user = User.where(:id => params[:id]).joins(:wall_posts).includes(:wall_posts).order('posts.created_at DESC').limit(1)
 
-		render json: user.to_json( :only => [:id , :image , :DOB , :created_at ], :methods => [:fullname] ,
+		render json: user[0].to_json( :only => [:id , :image , :DOB , :created_at ], :methods => [:fullname] ,
 									:include =>  { :wall_posts => { :order => 'created_at DESC',
 										:include => { :sender => { :only => [ :id , :image ] , :methods => [:fullname] } },
 										:only => [ :title , :created_at ] } } )
