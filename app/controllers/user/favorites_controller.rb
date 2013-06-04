@@ -2,12 +2,16 @@ class User::FavoritesController < ApplicationController
 
 	def add
 
-		movie_id = params[:id]
-		user_id = session[:user_id]
+		movie_id = params[:movie_id]
+		user_id = params[:id]
 
 		user = User.find(user_id)
 
 		## have to check if it is the same user with authToken.
+		# if ( user.authToken != params[:token] )
+		# 	render json: { "success" => "Wrong credentials"}
+		# 	return
+		# end
 
 		list_id = user.lists[0].id
 
@@ -25,6 +29,10 @@ class User::FavoritesController < ApplicationController
 		user = User.find(user_id)
 
 		## have to check if it is the same user with authToken.
+		# if ( user.authToken != params[:token] )
+		# 	render json: { "success" => "Wrong credentials"}
+		# 	return
+		# end
 
 		list_id = user.lists[0].id
 
