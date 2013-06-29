@@ -7,6 +7,8 @@ Simple::Application.routes.draw do
 	match 'movies/:id/aparitii', :to => "movies#aparitii"
 
 
+	match 'cinemas/' => "cinemas#index"
+
 	get "parser/early_reload"
 
 	match "/parser" => "parser#index"
